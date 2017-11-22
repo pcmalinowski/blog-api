@@ -1,14 +1,13 @@
-const express = require(`express`);
-const morgan = require(`morgan`)
+const express = require('express');
+const morgan = require('morgan');
 
-
-const blogRouter = require('./blogRouter');
+const blogPostsRouter = require('./blogPostsRouter');
 const app = express();
 
 
 app.use(morgan('common'));
 
-app.use('/blog-posts', blogRouter);
+app.use('/blog-posts', blogPostsRouter);
 
 let server;
 
@@ -30,7 +29,7 @@ function closeServer() {
     server.close(err => {
       if (err) {
         reject(err);
-    
+        // so we don't also call `resolve()`
         return;
       }
       resolve();
